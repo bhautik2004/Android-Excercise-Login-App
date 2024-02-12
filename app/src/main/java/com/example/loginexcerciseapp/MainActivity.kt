@@ -13,7 +13,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val sharedPreferences = getSharedPreferences(sharedPreferences, Context.MODE_PRIVATE)
+        val useremail = sharedPreferences.getString("email", null)
+        if (useremail != null) {
+            val intent = Intent(this, SuccessActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         val db = openOrCreateDatabase("my_db", Context.MODE_PRIVATE, null)
         db.execSQL("CREATE TABLE IF NOT EXISTS user (fname VARCHAR, lname VARCHAR, email VARCHAR, password VARCHAR);")
         arbtn.setOnClickListener {
@@ -21,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
         val fname = findViewById<EditText>(R.id.fname)
         val lname = findViewById<EditText>(R.id.lname)
         val email = findViewById<EditText>(R.id.email)

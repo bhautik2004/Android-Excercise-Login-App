@@ -15,15 +15,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-
         val sharedPreferences = getSharedPreferences(sharedPreferences, Context.MODE_PRIVATE)
-        val useremail = sharedPreferences.getString("email", null)
-        if (useremail != null) {
-            val intent = Intent(this, SuccessActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
         val db = openOrCreateDatabase("my_db", Context.MODE_PRIVATE, null)
 
         val lemail = findViewById<EditText>(R.id.email)
@@ -48,12 +40,8 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Email or Password Is Wrong", Toast.LENGTH_LONG).show()
                 }
-
             }
-
         }
-
-
     }
 
     private fun ShowMessage(title: String, msg: String) {
@@ -64,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
 
         }
         b.show()
-
     }
 
     private fun isvalid(email: String, password: String): Boolean {
